@@ -1,0 +1,115 @@
+name: New Data Request Form
+description: Fill out this form to request new data on Tellor
+title: "[New Data Request Form]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this new data request form!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: true
+  - type: input
+    id: spot-price-check
+    attributes:
+      label: Just need a new Spot Price?
+      description: Which asset currency pair? How frequent do you want updates? Which API exchanges do you want data from?
+      placeholder: ex. BTC/USD. Every 1 hours. Binance, coinbase.
+  - type: markdown
+    attributes:
+      value: |
+        **Advanced requests below...**
+  - type: input
+    id: type-name
+    attributes:
+      label: Query Type Name
+      description: A unique name of your new Query type. 
+      placeholder: (e.g. SpotPrice, Snapshot)
+    validations:
+      required: false
+  - type: textarea
+    id: query-type-description
+    attributes:
+      label: Description
+      description: A general description of the Query type, including its purpose and suggested use cases.
+    validations:
+      required: false
+  - type: markdown
+    id: query-parameters-explanation
+    attributes:
+      value: >
+        ## Query Parameters |
+
+        A query's parameters may change for each instance of your query type. For example, a `SpotPrice` query has both an `asset` and `currency` parameter. One instance of a `SpotPrice` query could have parameter values of `eth` (asset) and `usd` (currency), while another's `currency` parameter value might be `eur`. Query parameters should be styled in `mixedCase`, matching Solidity styling. The definition of your new query type's parameters must each include:
+          - Parameter name (a string)
+          - Description and value specification
+          - Valid ABI type
+          - The parameter order required for the query data bytes (more on this later)
+
+        For example, the `SpotPrice` query type's parameters are defined as:
+        
+        ```
+        
+        1. asset
+            - description: Asset ID (e.g. BTC)
+            - value type: `string`
+        2. currency
+            - description: Selected currency (e.g. USD)
+            - value type: `string`
+        ```
+
+        For a query with no parameters, `QueryWithNoParameters`, one should always include a single empty bytes argument with the name `phantom` as a convention:
+
+        ```
+        1. phantom
+          - description: Empty bytes, always used for query types with no arguments
+          - value type: `bytes`
+        ```
+  - type: textarea
+    id: your-query-parameters
+    attributes:
+      label: Your query parameters
+      description: place your query parameters with their description + solidity data types here
+      placeholder: "- query paremeter (description, solidity value type)..."
+  - type: markdown
+    id: response-type-explanation
+    attributes:
+      value: > 
+        ## Response Type
+
+        Specify the ABI type as a valid ETH ABI grammar string(e.g uint256, bytes32, bytes, etc), as well as a boolean signifying whether the reponse will be packed or not when encoded to bytes. More on valid types [here](https://docs.soliditylang.org/en/v0.8.13/types.html).
+
+        For example, the `SpotPrice`'s response type is an unpacked 256 bit value with 18 decimals of precision:
+        
+        ```
+        
+        - abi_type: ufixed256x18 (18 decimals of precision)
+        - packed: false
+        ```
+  - type: textarea
+    id: your-response-type
+    attributes:
+      label: Your response type
+      description: place your response type with their description + solidity data types here
+      placeholder: "- response type (description, solidity value type)..."
+  - type: textarea
+    id: dispute-considerations
+    attributes:
+      label: Dispute Considerations
+      description: How should the data be formatted? How should it be measured? When should it be disputed?
+      placeholder: "Note that following this guide does not prevent you from being disputed or guarantee reporters will properly put a value on-chain. Tellor is decentralized. This repo is a start to the education necessary for a fully decentralized oracle, but please focus on communication and working with reporters to prevent unneccesary disputes and at the same time encourage monitoring and punishment of bad data."
+  - type: textarea
+    id: suggested-data-sources
+    attributes:
+      label: Suggested Data Sources
+      placeholder: "Where can reporters retrieve the query's response? Are there APIs available so reporters can programmatically retrieve the data for your query's expected response? Are there multiple possible sources for the expected response?" 
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Form Feedback
+      description: Was anything on this form confusing or hard to understand? Please let us know here!
