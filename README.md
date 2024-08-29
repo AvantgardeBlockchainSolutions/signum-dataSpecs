@@ -2,7 +2,7 @@
 
 This repository contains specifications of data requested from, reported to, and retrieved from Signum oracles. Each specification is called a `Query`.
 
-- [For Signum Users](#for-tellor-users)
+- [For Signum Users](#for-signum-users)
 - [For Signum Reporters](#for-signum-reporters)
 - [Create new Query type](#create-new-query-type)
 
@@ -10,7 +10,7 @@ This repository contains specifications of data requested from, reported to, and
 
 ### **Price data**:
 
-First check if the price data is already being reported [here](https://github.com/AvantgardeBlockchainSolutions/signum-feeds/tree/main/src/telliot_feeds/feeds). If it is not, [please fill this out.](https://github.com/tellor-io/telliot-feeds/issues/new/choose)
+First check if the price data is already being reported [here](https://github.com/AvantgardeBlockchainSolutions/signum-feeds/tree/main/src/telliot_feeds/feeds). If it is not, [please fill this out.](https://github.com/AvantgardeBlockchainSolutions/signum-feeds/issues/new/choose)
 
 Need a spot price from Signum? Generate a unique identifier, or query ID, for the `asset/currency` pair using [this tool](https://queryidbuilder.herokuapp.com/). After, use that ID to [pay reporters](https://github.com/AvantgardeBlockchainSolutions/signum-autoPay) to put that data on-chain. Then retrieve the reported spot price from the oracle [like this](https://docs.signum.run/getting-data/introduction).
 
